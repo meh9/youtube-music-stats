@@ -17,7 +17,7 @@ Save your `watch-history.json` that you downloaded from Google Takeout in the ro
 
 Then simply run the script with something like:
 ```
-python3 listen_history.py > history.txt
+python3 listen_history.py
 ```
 
 ### Google Takeout reference screenshots
