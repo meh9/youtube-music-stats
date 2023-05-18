@@ -14,7 +14,7 @@ for entry in data:
  
         if music:
             artist  = entry["subtitles"][0]["name"].replace(" - Topic", "")
-            title = f'{title} - {artist}'
+            title = f'{artist} - {title}'
  
         if title in pruned:
             pruned[title] = pruned[title] + 1
