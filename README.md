@@ -1,16 +1,16 @@
 # youtube-music-stats
 Get stats from your Youtube Music history
 
-Simple python script to process your Youtube Music history and tell you what you listen to most (and least).
+Simple python script to process your Youtube Music history and tell you what you listen to most (and least). The statistics data is saved to a CSV file so you can open it in Excel or your spreadsheet of choice, or pass it in to other tools.
 
-The Youtube Music stats file needs to be downloaded from Google Takeout, here: https://takeout.google.com/settings/takeout
+The Youtube Music stats file that the script takes as input needs to be downloaded from Google Takeout: https://takeout.google.com/settings/takeout
 
-Remember to set the data format to JSON before downloading.
+In Google Takeout, you do not need anything else but the very last option `YouTube and YouTube Music` ticked - so consider using the `Deselect all` at the top. Remember to set the data format to JSON before downloading - see screenshots at the bottom of this page for further guidance.
 
-There's some screenshots at the bottom to help.
 
 ### Requirements
 It has none - Python has batteries included already.
+
 
 ### Running
 Save your `watch-history.json` that you downloaded from Google Takeout in the root directory next to the script.
@@ -19,6 +19,10 @@ Then simply run the script with something like:
 ```
 python3 listen_history.py
 ```
+When the script runs successfully, it will finish by telling you your total number of tracks played - that means it worked!
+
+There should now be a file named `history.csv`.
+
 
 ### Google Takeout reference screenshots
 <img width="350" alt="history" src="https://raw.githubusercontent.com/meh9/youtube-music-stats/main/history.png">
