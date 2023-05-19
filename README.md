@@ -23,6 +23,21 @@ When the script runs successfully, it will finish by telling you your total numb
 
 There should now be a file named `history.csv`.
 
+You can optionally tell it to use different file names for input and output:
+```
+% python3 listen_history.py --help       
+usage: listen_history.py [-h] [-f [INFILE]] [-o [OUTFILE]]
+
+Produce listening statistics from Youtube Music history.
+
+options:
+  -h, --help            show this help message and exit
+  -f [INFILE], --infile [INFILE]
+                        specify a file to read other than the default 'watch-history.json'
+  -o [OUTFILE], --outfile [OUTFILE]
+                        specify a file to write the output to other than the default 'history.csv'
+```
+
 
 ### Google Takeout reference screenshots
 <img width="350" alt="history" src="https://raw.githubusercontent.com/meh9/youtube-music-stats/main/history.png">
