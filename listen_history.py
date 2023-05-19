@@ -3,14 +3,41 @@ Parse watch-history.json from Google Takeout, count how many times each song has
 and write the stats to a CSV, sorted in reverse order first by Listens then by Artist-Title.
 """
 
+import argparse
 import csv
 import json
 from typing import Any
 
+infile_default: str = "watch-history.json"
+outfile_default: str = "history.csv"
+
+parser: argparse.ArgumentParser = argparse.ArgumentParser(
+    description="Produce listening statistics from Youtube Music history."
+)
+parser.add_argument(
+    "-f",
+    "--infile",
+    nargs="?",
+    type=argparse.FileType("r"),
+    default=infile_default,
+    const=infile_default,
+    help=f"specify a file to read other than the default '{infile_default}'",
+)
+parser.add_argument(
+    "-o",
+    "--outfile",
+    nargs="?",
+    type=argparse.FileType("w"),
+    default=outfile_default,
+    const=outfile_default,
+    help=f"specify a file to write the output to other than the default '{outfile_default}'",
+)
+args: argparse.Namespace = parser.parse_args()
+
 data: list[dict[str, Any]] = []
 pruned: dict[tuple[str, str], int] = {}
 
-with open("watch-history.json", "r", encoding="utf8") as f:
+with args.infile as f:
     data = json.load(f)
 
 for entry in data:
@@ -32,13 +59,14 @@ for entry in data:
 
 total_plays: int = 0
 
-with open("history.csv", "w", encoding="utf8") as csvfile:
+with args.outfile as csvfile:
     history_writer = csv.writer(csvfile, dialect="excel", quoting=csv.QUOTE_MINIMAL)
     history_writer.writerow(["Artist", "Title", "Listens"])
 
-    for song, listens in dict(
+    sorted_dict: dict[tuple[str, str], int] = dict(
         sorted(pruned.items(), key=lambda item: (item[1], item[0]), reverse=True)
-    ).items():
+    )
+    for song, listens in sorted_dict.items():
         total_plays += listens
         history_writer.writerow([song[0], song[1], listens])
 
